@@ -77,6 +77,7 @@ export default {
     position: absolute;
     transition: height 0.3s ease;
     width: 100%;
+    z-index: 2;
   }
 
   &__list {

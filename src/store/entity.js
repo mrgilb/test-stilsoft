@@ -26,6 +26,7 @@ export default {
 
     deleteCardById(state, id) {
       state.list = state.list.filter((item) => item.id !== id);
+      state.currentPage = Math.ceil(state.list.length / state.perPage);
     },
 
     addCard(state, { text, enumValue }) {
@@ -38,7 +39,7 @@ export default {
         img: faker.image.url(),
       };
 
-      state.list.push(card)
+      state.list.push(card);
     },
   },
 
