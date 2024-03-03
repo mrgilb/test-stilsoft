@@ -26,7 +26,6 @@ export default {
 
     deleteCardById(state, id) {
       state.list = state.list.filter((item) => item.id !== id);
-      state.currentPage = Math.ceil(state.list.length / state.perPage);
     },
 
     addCard(state, { text, enumValue }) {

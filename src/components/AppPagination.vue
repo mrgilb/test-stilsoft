@@ -40,6 +40,7 @@ export default {
   width: fit-content;
   gap: 8px;
   margin: 0 auto;
+  padding: 0;
 
 
   &__btn {

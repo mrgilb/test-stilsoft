@@ -81,6 +81,9 @@ export default {
   methods: {
     handlerSearchUpdate(value) {
       this.$store.commit("setSearchValue", value);
+      if (Number(this.$route.params.page) !== 1) {
+        this.$router.push({ path: "/1" });
+      }
     },
     handlerDeleteCard(id) {
       this.$store.commit("setStateModal", {
@@ -102,12 +105,15 @@ export default {
       this.selectValue = value.id;
     },
   },
-  watch: {
-    "$route.params.page": {
-      handler: function () {
-        this.$store.commit("setCurrentPage", this.$route.params.page || 1);
-      },
-    },
+  mounted() {
+    this.$store.commit("setCurrentPage", this.$route.params.page || 1);
+  },
+  updated() {
+    if (Number(this.$route.params.page) > this.totalPages) {
+      this.$store.commit("setCurrentPage", this.totalPages);
+    } else {
+      this.$store.commit("setCurrentPage", this.$route.params.page);
+    }
   },
 };
 </script>

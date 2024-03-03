@@ -2,7 +2,7 @@
 
 import { faker } from "@faker-js/faker";
 
-export const list = Array.from({ length: 177 }, (value, index) => ({
+export const list = Array.from({ length: 170 }, (value, index) => ({
   name: faker.person.fullName(), // Случайное имя
   id: index + 1, // ID
   boolean: faker.datatype.boolean(), // True или false
