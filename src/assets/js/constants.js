@@ -1,6 +1,7 @@
 import AppModalConfirm from "@/components/AppModal/AppModalConfirm.vue";
+import AppModalAddEntity from "@/components/AppModal/AppModalAddEntity.vue";
 
-export const ENUM = {
+export const ENUM_LIST = {
   1: "Первый",
   2: "Второй",
   3: "Третий",
@@ -9,5 +10,6 @@ export const ENUM = {
 };
 
 export const MODAL_ENUM = {
-  0: AppModalConfirm
+  0: AppModalConfirm,
+  1: AppModalAddEntity
 }

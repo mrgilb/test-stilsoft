@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { ENUM } from "@/assets/js/constants";
+import { ENUM_LIST } from "@/assets/js/constants";
 
 export default {
   name: "AppCard",
@@ -70,7 +70,7 @@ export default {
   },
   data() {
     return {
-      enumMap: ENUM,
+      enumMap: ENUM_LIST,
     };
   },
   emits: ['delete'],

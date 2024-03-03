@@ -10,6 +10,9 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/:page',
+  }
 ]
 
 const router = new VueRouter({

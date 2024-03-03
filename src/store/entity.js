@@ -1,5 +1,6 @@
 import { list } from "@/assets/js/entity";
-import {faker} from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
+import { generateUniqueId } from "@/tools";
 
 export default {
   state: () => ({
@@ -19,26 +20,26 @@ export default {
     },
 
     setSearchValue(state, value) {
+      state.currentPage = 1;
       state.searchValue = value;
     },
 
     deleteCardById(state, id) {
-      state.list = state.list.filter(item => item.id !== id)
+      state.list = state.list.filter((item) => item.id !== id);
     },
 
-    addCard(state, value) {
-      console.log(value)
+    addCard(state, { text, enumValue }) {
       const card = {
-        name: faker.person.fullName(), // Случайное имя
-        id: state.list.length + 1, // ID
-        boolean: faker.datatype.boolean(), // True или false
-        date: faker.date.past().toISOString(), // Дата в формате ISO 8601
-        enum: faker.number.int({ min: 1, max: 5 }), // Случайное число из массива [1, 2, 3, 4, 5] для enum
+        name: text,
+        id: generateUniqueId(state.list),
+        boolean: faker.datatype.boolean(),
+        date: faker.date.past().toISOString(),
+        enum: Number(enumValue),
         img: faker.image.url(),
-      }
+      };
 
-      console.log(card)
-    }
+      state.list.push(card)
+    },
   },
 
   getters: {

@@ -55,14 +55,6 @@ export default {
   methods: {
     handlerPaginate(page) {
       this.$store.commit("setCurrentPage", page);
-
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          ...this.$route.query,
-          currentPage: this.currentPage,
-        },
-      });
     },
     handlerSearchUpdate(value) {
       this.$store.commit("setSearchValue", value);
@@ -77,24 +69,20 @@ export default {
       });
     },
     handlerAddEntity() {
-
-    }
-  },
-  created() {
-    this.$store.commit("setCurrentPage", this.$route.query.currentPage || 1);
-
-    if (
-      this.$route.path !== this.$route.path ||
-      JSON.stringify(this.$route.query) !== JSON.stringify(this.$route.query)
-    ) {
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          ...this.$route.query,
-          currentPage: this.currentPage,
-        },
+      this.$store.commit("setStateModal", {
+        isOpen: true,
+        currentModal: 1,
+        handlerConfirm: () => {},
       });
-    }
+    },
+  },
+  watch: {
+    currentPage() {
+
+    },
+  },
+  mounted() {
+    this.$store.commit("setCurrentPage", this.$route.query.currentPage || 1);
   },
 };
 </script>

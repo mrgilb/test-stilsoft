@@ -1,6 +1,6 @@
 <template>
   <div class="app-modal" v-if="isOpen">
-    <div ref="inner" class="app-modal__inner">
+    <div class="app-modal__inner" @click.stop>
       <component :is="modalEnum[currentModal]" />
     </div>
   </div>
@@ -32,14 +32,12 @@ export default {
         });
       }
     },
-    handlerCLickOutside(evt) {
-      if (evt.target !== this.$refs.inner) {
-        this.$store.commit("setStateModal", {
-          isOpen: false,
-          currentModal: null,
-          handlerConfirm: null,
-        });
-      }
+    handlerCLickOutside() {
+      this.$store.commit("setStateModal", {
+        isOpen: false,
+        currentModal: null,
+        handlerConfirm: null,
+      });
     },
   },
   mounted() {
