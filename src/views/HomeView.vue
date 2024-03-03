@@ -29,7 +29,7 @@
 
     <router-view />
 
-    <AppPagination :count="totalPages" @paginate="handlerPaginate" />
+    <AppPagination :count="totalPages" />
 
     <AppModal />
   </div>
@@ -79,9 +79,6 @@ export default {
     }),
   },
   methods: {
-    handlerPaginate(page) {
-      this.$store.commit("setCurrentPage", page);
-    },
     handlerSearchUpdate(value) {
       this.$store.commit("setSearchValue", value);
     },
@@ -106,10 +103,11 @@ export default {
     },
   },
   watch: {
-    currentPage() {},
-  },
-  mounted() {
-    this.$store.commit("setCurrentPage", this.$route.query.currentPage || 1);
+    "$route.params.page": {
+      handler: function () {
+        this.$store.commit("setCurrentPage", this.$route.params.page || 1);
+      },
+    },
   },
 };
 </script>

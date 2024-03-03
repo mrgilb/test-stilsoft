@@ -7,12 +7,6 @@ export default {
       required: true,
     },
   },
-  emits: ["paginate"],
-  methods: {
-    handlerClick(page) {
-      this.$emit("paginate", page);
-    },
-  },
 };
 </script>
 
@@ -23,17 +17,17 @@ export default {
       v-for="item in count"
       :key="item"
     >
-      <button
+      <router-link
         class="app-pagination__btn"
+        :to="`/${item}`"
         :class="
           Number(item) === Number($store.getters.getCurrentPage)
             ? 'app-pagination__btn_active'
             : null
         "
-        @click.stop="handlerClick(item)"
       >
         {{ item }}
-      </button>
+      </router-link>
     </li>
   </ul>
 </template>
@@ -47,7 +41,18 @@ export default {
   gap: 8px;
   margin: 0 auto;
 
+
   &__btn {
+    text-decoration: none;
+    color: black;
+    width: 30px;
+    height: 30px;
+    background: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+
     &_active {
       pointer-events: none;
       font-weight: 600;
