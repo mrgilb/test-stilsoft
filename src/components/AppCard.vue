@@ -1,56 +1,108 @@
+<template>
+  <div class="app-card">
+    <p class="app-card__field">
+      <span> Картинка </span>
+      <a :href="img" target="_blank"> Ссылка на картинку </a>
+    </p>
+
+    <p class="app-card__text app-card__field">
+      <span>Текст</span>
+      {{ text }}
+    </p>
+
+    <p class="app-card__number app-card__field">
+      <span>Число</span>
+      {{ id }}
+    </p>
+
+    <label class="app-card__boolean app-card__field">
+      <span> Булево </span>
+      <input :checked="boolean" type="checkbox" :name="`card-${id}`" disabled />
+    </label>
+
+    <p class="app-card__date app-card__field">
+      <span>Дата</span>
+      {{ date }}
+    </p>
+
+    <p class="app-card__enum app-card__field">
+      <span>enum</span>
+      {{ enumMap[enumValue] }}
+    </p>
+
+    <button class="app-card__delete" @click.stop="handlerClickDelete">
+      удалить
+    </button>
+  </div>
+</template>
+
 <script>
+import { ENUM } from "@/assets/js/constants";
+
 export default {
   name: "AppCard",
   props: {
     text: {
       type: String,
       required: true,
-      default: ''
     },
-    number: {
+    id: {
       type: Number,
       required: true,
-      default: null
     },
-    boolean : {
+    boolean: {
       type: Boolean,
       required: true,
-      default: false
     },
-    date : {
+    date: {
       type: String,
       required: true,
-      default: ''
     },
-    selectedId: {
+    enumValue: {
       type: Number,
       required: true,
-      default: null
     },
+    img: {
+      type: String,
+      required: true,
+      default: "",
+    },
+  },
+  data() {
+    return {
+      enumMap: ENUM,
+    };
+  },
+  emits: ['delete'],
+  methods: {
+    handlerClickDelete() {
+      this.$emit('delete', this.id)
+    }
   }
-}
+};
 </script>
-
-<template>
-  <div class="app-card">
-    <p class="app-card__text">
-      {{ text }}
-    </p>
-
-    <p class="app-card__number">
-      {{ number }}
-    </p>
-
-    <label class="app-card__boolean">
-      <input :checked="boolean" type="checkbox" disabled>
-    </label>
-
-
-  </div>
-</template>
 
 <style scoped lang="scss">
 .app-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  position: relative;
 
+  &__field {
+    display: grid;
+    gap: 16px;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 8px 8px 0 0;
+  }
 }
 </style>
