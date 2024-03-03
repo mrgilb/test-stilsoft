@@ -22,7 +22,7 @@
 
     <p class="app-card__date app-card__field">
       <span>Дата</span>
-      {{ date }}
+      <DatePicker v-model="editableDate" value-type="format" format="YYYY-MM-DD" />
     </p>
 
     <p class="app-card__enum app-card__field">
@@ -38,9 +38,12 @@
 
 <script>
 import { ENUM_LIST } from "@/assets/js/constants";
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
 
 export default {
   name: "AppCard",
+  components: { DatePicker },
   props: {
     text: {
       type: String,
@@ -71,14 +74,15 @@ export default {
   data() {
     return {
       enumMap: ENUM_LIST,
+      editableDate: this.date,
     };
   },
-  emits: ['delete'],
+  emits: ["delete"],
   methods: {
     handlerClickDelete() {
-      this.$emit('delete', this.id)
-    }
-  }
+      this.$emit("delete", this.id);
+    },
+  },
 };
 </script>
 

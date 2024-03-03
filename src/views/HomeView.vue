@@ -27,6 +27,8 @@
       </template>
     </AppList>
 
+    <router-view />
+
     <AppPagination :count="totalPages" @paginate="handlerPaginate" />
 
     <AppModal />
